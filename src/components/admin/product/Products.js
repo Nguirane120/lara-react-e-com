@@ -25,16 +25,26 @@ const Products = () => {
             <h1>Loading products...</h1>
         )
     }else{
+        let producStatus = '';
         fetchProducts = products.map((item, index) =>{
+            if(item.status === 1)
+            {
+                producStatus = 'shown'
+            }
+            else if (item.status === 0)
+            {
+                producStatus = 'deleted'
+            }
+            console.log(item.status)
             return(
                 <tr key={index}>
                     <td>{item.id}</td>
                     <td>{item.category.name}</td>
                     <td>{item.name}</td>
-                    <td><img src={`http://127.0.0.1:8000/${item.image}`} width="50px" alt={item.name} /></td>
+                    <td><img src={`http://api-lara-react.herokuapp.com/${item.image}`} width="50px" alt={item.name} /></td>
                     <td>{item.selling_price}</td>
-                    <td><Link className='btn btn-warning btn-sm'>Edit</Link></td>
-                    <td><Link className='btn btn-danger btn-sm'>Delete</Link></td>
+                    <td><Link className='btn btn-warning btn-sm' to={`edit-product/${item.id}`}>Edit</Link></td>
+                    <td>{producStatus}</td>
                 </tr>
             )
         })
@@ -57,7 +67,8 @@ const Products = () => {
                             <th>Name</th>
                             <th>Image</th>
                             <th>Selling</th>
-                            <th>Actions</th>
+                            <th>Action</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>

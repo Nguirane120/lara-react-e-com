@@ -11,21 +11,21 @@ const AdminProectedRoute = ({...rest}) => {
     const history = useHistory()
 
     useEffect(() => {
-    // axios.get(`api/checkAuthenticated`).then(() =>{
-    //     if(rest.status === 200){
+    axios.get(`api/checkAuthenticated`).then((res) =>{
+        if(res.status === 200){
 
-    //         setAuthenticated(true)
-    //     }
-    //     setLoading(false)
-    // })
-          if(localStorage.getItem("auth_token")!=null)
-        {
-          
-          setAuthenticated(true)
-        }else{
-          swal("Error", "veuillez-vous connectez svp", 'warning')
+            setAuthenticated(true)
         }
-      setLoading(false)
+        setLoading(false)
+    })
+      //     if(localStorage.getItem("auth_token")!=null)
+      //   {
+          
+      //     setAuthenticated(true)
+      //   }else{
+      //     swal("Error", "veuillez-vous connectez svp", 'warning')
+      //   }
+      // setLoading(false)
       return () => {
         setAuthenticated(false)
       }
@@ -33,15 +33,30 @@ const AdminProectedRoute = ({...rest}) => {
 
 
 
-    // axios.interceptors.response.use(undefined, (err) =>{   
-    //  if(err.response.status === 401)
-    //  {
-    //    swal("Error", err.response.data.message, 'warning')
-    //  }
+    axios.interceptors.response.use(undefined, (err) =>{   
+     if(err.response.status === 401)
+     {
+       swal("UNAUTHORIZED", err.response.data.message, 'warning')
+       history.push('/login')
+     }
 
-    // //  return Promise.reject(err)
+     return Promise.reject(err)
 
-    // })
+    })
+
+    axios.interceptors.response.use(undefined, function(error){
+      if(error.response.status === 403){
+        swal("FORBIDEN", error.response.data.message, 'warning')
+        history.push('/')
+      }
+
+      else if(error.response.status === 404)
+      {
+        swal("NOT FOUND", error.response.data.message, 'warning')
+        history.push('/')
+      }
+      return Promise.reject(error)
+    })
 
 
     if(loading){

@@ -39,7 +39,16 @@ const handleSubmit = (e) =>{
     axios.post(`api/add-category`, data).then( res =>{
         if(res.data.status === 200){
             swal("Success", res.data.message, 'success')
-            setCategory('')
+            setCategory({
+                slug:'',
+                name:'',
+                description:'',
+                status:'',
+                meta_title:'',
+                meta_keywords:'',
+                meta_description:'',
+                error_list:[]
+            })
         }else if( res.data.status === 400){
             setCategory({...category, error_list:res.data.errors})
             console.log(error_list.slug)
