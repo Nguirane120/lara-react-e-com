@@ -15,7 +15,7 @@ const Products = () => {
             }
             setLoading(false)
         })
-    }, [])
+    }, [products])
 
     let fetchProducts = ''
 

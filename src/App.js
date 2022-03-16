@@ -10,10 +10,14 @@ import Home from './components/Home';
 
 import axios from 'axios'
 import AdminProectedRoute from './components/admin/AdminProectedRoute';
+import About from './components/frontend/About';
+import Contact from './components/frontend/Contact';
+// import FrontendLayout from './components/frontend/FrontendLayout';
+import RoutePublic from './components/frontend/RoutePublic';
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = "http://api-lara-react.herokuapp.com/"
-// axios.defaults.baseURL = "http://127.0.0.1:8000/"
+// axios.defaults.baseURL = "http://api-lara-react.herokuapp.com/"
+axios.defaults.baseURL = "http://127.0.0.1:8000/"
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.defaults.headers.post['Accept'] = 'application/json'
 
@@ -30,17 +34,15 @@ function App() {
   
           <Router>
       <Switch>
-            <Route exact path='/' component={Home} />
-            {/* <Route path='/register' component={Register} />
-            <Route path='/login'component={Login} /> */}
+        <AdminProectedRoute path='/admin' name="Admin" />
+            <RoutePublic path='/' name="Home"/>
             <Route path='/login'>
               { localStorage.getItem('auth_token') ? <Redirect to='/'/> : <Login/>}
             </Route>
             <Route path='/register'>
               { localStorage.getItem('auth_token') ? <Redirect to='/'/> : <Register/>}
             </Route>
-            {/* <Route path='/admin' name="Admin" render={(props) => <MasterLayout {...props}/> } /> */}
-            <AdminProectedRoute path='/admin' name="Admin" />
+            
       </Switch>
           </Router>
     </>

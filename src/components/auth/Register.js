@@ -65,7 +65,7 @@ const Register = () => {
 
   return (
       <>
-      <Navbar/>
+      {/* <Navbar/> */}
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-md-6 py-5">
