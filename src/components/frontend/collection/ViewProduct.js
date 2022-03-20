@@ -53,11 +53,11 @@ const ViewProduct = (props) => {
                     <>
                         <div className="col-md-3" key={index}>
                             <div className="card">
-                                <Link>
-                                    <img src={`http://127.0.0.1:8000/${item.image}`} className="w-100" alt={item.name} />
+                                <Link to={`/collection/${item.category.slug}/${item.slug}`}>
+                                    <img src={`https://api-lara-react.herokuapp.com/${item.image}`} className="w-100" alt={item.name} />
                                 </Link>
                                 <div className="card-body">
-                                    <Link>
+                                    <Link to={`/collection/${item.category.slug}/${item.slug}`}>
                                     <h5>{item.name}</h5>
                                     </Link>
                                 </div>
