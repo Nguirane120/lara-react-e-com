@@ -85,7 +85,7 @@ const Cart = () => {
     let existingCart = '';
 
     if (carts.length > 0) {
-        existingCart = <div className="table-responsive">
+        existingCart = <> <div className="table-responsive">
             <table className="table table-borded">
                 <thead>
                     <tr>
@@ -102,9 +102,9 @@ const Cart = () => {
                         carts.map((item, index) => {
                             totalCartPrice += item.product.selling_price * item.product_qty
                             return (
-                                <tr key={index}>
-                                    <td width="10%" >
-                                        <img src={`https://api-lara-react.herokuapp.com/${item.product.image}`} alt={item.product.name} width="50px" height="50px" />
+                                <tr>
+                                    <td width="10%" key={index}>
+                                        <img src={`http://127.0.0.1:8000/${item.product.image}`} alt={item.product.name} width="50px" height="50px" />
                                     </td>
 
                                     <td>{item.product.name}</td>
@@ -125,7 +125,9 @@ const Cart = () => {
                     }
                 </tbody>
             </table>
+        </div>
             <div className="row">
+                <div className="col-md-8"></div>
                 <div className="col-md-4">
                     <div className="card card-body mt-3">
                         <h4>
@@ -139,7 +141,7 @@ const Cart = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     }
     else {
         existingCart = <div className="card card-body py-5 text-center shadow-sm">
@@ -158,7 +160,6 @@ const Cart = () => {
                     <div className="col-md-12">
                         {existingCart}
                     </div>
-                    <div className="col-md-8"></div>
 
                 </div>
             </div>
