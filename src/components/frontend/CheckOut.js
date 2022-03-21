@@ -67,7 +67,7 @@ const CheckOut = () => {
                 <table className="table table-striped">
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>Product Name</th>
                         </tr>
                     </thead>
                 </table>
