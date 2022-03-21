@@ -104,7 +104,7 @@ const Cart = () => {
                             return (
                                 <tr>
                                     <td width="10%" key={index}>
-                                        <img src={`http://127.0.0.1:8000/${item.product.image}`} alt={item.product.name} width="50px" height="50px" />
+                                        <img src={`https://api-lara-react.herokuapp.com/${item.product.image}`} alt={item.product.name} width="50px" height="50px" />
                                     </td>
 
                                     <td>{item.product.name}</td>
