@@ -3,6 +3,7 @@ import Register from "../auth/Register";
 import Home from "../Home";
 import About from "./About";
 import Cart from "./Cart";
+import CheckOut from "./CheckOut";
 import ProductDetail from "./collection/ProductDetail";
 import ViewCategories from "./collection/ViewCategories";
 import ViewProduct from "./collection/ViewProduct";
@@ -18,6 +19,7 @@ const publicRouteList = [
     {path:"/collection/:slug",  exact:true, name:"ViewProduct", component:ViewProduct},
     {path:"/collection/:category/:product",  exact:true, name:"ProductDetail", component:ProductDetail},
     {path:"/cart",  exact:true, name:"Cart", component:Cart},
+    {path:"/checkout",  exact:true, name:"CheckOut", component:CheckOut},
 ]
 
 

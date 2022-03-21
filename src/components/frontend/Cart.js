@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import swal from 'sweetalert'
 
 const Cart = () => {
@@ -56,11 +56,38 @@ const handleDecrement  = cart_id =>{
        updateCartQty(cart_id, 'inc')
 }
 
+const handleDelete = (e, cart_id) =>{
+    e.preventDefault()
+    const clicked = e.currentTarget;
+    clicked.innerText = "Deleting..."
+    axios.delete(`api/delete-Item/${cart_id}`).then((res) =>{
+        if(res.data.status === 200)
+        {
+            swal('Sucess', res.data.message, 'success')
+            clicked.closest('tr').remove()
+        }
+        else if(res.data.status === 404)
+        {
+            swal("Error", res.data.message, 'error')
+            clicked.innerText = "Delete"
+        }
+        else if(res.data.status === 401)
+        {
+            swal("Error", res.data.message, 'error')
+        }
+
+    })
+
+
+
+}
+
 if(loading)
 {
     return <h1>Loading carts data...</h1>
 }
 
+let totalCartPrice = 0;
 let existingCart = '';
 
 if(carts.length > 0)
@@ -80,10 +107,11 @@ if(carts.length > 0)
         <tbody>
             {
                 carts.map(( item, index) =>{
+                    totalCartPrice += item.product.selling_price * item.product_qty
                     return(
                     <tr>
                         <td width="10%" key={index}> 
-                            <img src={`https://api-lara-react.herokuapp.com/${item.product.image}`} alt={item.product.name} width="50px" height="50px"/>
+                            <img src={`http://127.0.0.1:8000/${item.product.image}`} alt={item.product.name} width="50px" height="50px"/>
                         </td>
                     
                     <td>{item.product.name}</td>
@@ -96,6 +124,7 @@ if(carts.length > 0)
                         </div>
                     </td>
                     <td width="15%" className="text-center">{item.product.selling_price * item.product_qty}</td>
+                    <td><button className="btn btn-danger" onClick={(e) => handleDelete(e, item.id)}>Delete</button></td>
                     </tr>
 
                     )
@@ -121,6 +150,19 @@ else{
                 <div className="row">
                     <div className="col-md-12">
                         { existingCart}
+                    </div>
+                    <div className="col-md-8"></div>
+                    <div className="col-md-4">
+                        <div className="card card-body mt-3">
+                            <h4>
+                                Sub Total <span className="float-end">{totalCartPrice}</span>
+                            </h4>
+                            <h4>
+                                Grand Total <span className="float-end">{totalCartPrice}</span>
+                            </h4>
+                            <hr />
+                            <Link to="/checkout" className='bt btn-primary'>Checkout</Link>
+                        </div>
                     </div>
                 </div>
             </div>
