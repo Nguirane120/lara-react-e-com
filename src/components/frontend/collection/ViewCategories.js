@@ -15,7 +15,7 @@ const ViewCategories = () => {
         if(res.data.status == 200)
       {
 
-        console.log(res.data)
+        // console.log(res.data)
         setCategories(res.data.category)
         setLoading(false)
       }
@@ -43,9 +43,9 @@ const ViewCategories = () => {
         <div className="col-md-4" key={index}>
               <div className="card">
                 <div className="card-body">
-                  <Link to={`collection/${item.slug}`}>
+                  {/* <Link to={`collection/${item.slug}`}>
                     <img src="" alt={item.name} />
-                  </Link>
+                  </Link> */}
                   <Link to={`collection/${item.slug}`}>
                   <h4>{item.name}</h4>
                   </Link>

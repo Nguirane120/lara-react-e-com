@@ -51,8 +51,8 @@ const ViewProduct = (props) => {
             displayProduct =  product.map((item, index) =>{
                 return(
                     <>
-                        <div className="col-md-3" key={index}>
-                            <div className="card">
+                        <div className="col-md-3" >
+                            <div className="card" key={index}>
                                 <Link to={`/collection/${item.category.slug}/${item.slug}`}>
                                     <img src={`https://api-lara-react.herokuapp.com/${item.image}`} className="w-100" alt={item.name} />
                                 </Link>

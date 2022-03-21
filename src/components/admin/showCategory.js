@@ -63,10 +63,10 @@ export const ShowCategory = () => {
                     </thead>
                     <tbody>
                         {
-                            listCategory && listCategory.map(item =>{
+                            listCategory && listCategory.map((item, index) =>{
                                 return(
                                     <>
-                                        <tr>
+                                        <tr key={index}>
                                             <td>{item.id}</td>
                                             <td>{item.name}</td>
                                             <td>{item.slug}</td>
